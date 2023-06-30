@@ -1,0 +1,124 @@
+<section style="background-color: #eee;">
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="btn-group">
+          <button type="button" class="btn btn-secondary gradient-custom">{{lead}}</button>
+          <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split gradient-custom" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="visually-hidden">Toggle Dropdown</span>
+          </button>
+          <ul class="dropdown-menu">
+            <li  *ngFor="let ld of leads">
+              <a *ngIf="ld !== 'All'; else allLead" class="dropdown-item" (click)="getSelectedLead(ld)">{{ld}}</a></li>
+            <ng-template #allLead>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" (click)="getSelectedLead('All')">All</a></li>
+            </ng-template>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="btn-group">
+          <button type="button" class="btn btn-secondary gradient-custom">{{tech}}</button>
+          <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split gradient-custom" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="visually-hidden">Toggle Dropdown</span>
+          </button>
+          <ul class="dropdown-menu">
+            <li *ngFor="let tc of techs">
+              <a *ngIf="tc !== 'All'; else allTech" class="dropdown-item" (click)="getSelectedTech(tc)">{{tc}}</a></li>
+              <ng-template #allTech>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" (click)="getSelectedTech('All')">All</a></li>
+              </ng-template>
+          </ul>
+        </div>
+      </div>
+      <!-- Modal to add value -->
+      <div class="col-lg-4">
+          <div class="btn-group">
+            <button type="button" (click)="openFormModal()" class="btn btn-secondary gradient-custom">
+              Add
+            </button>
+          </div>  
+        <!--form modal-->
+        <div
+          class="modal fade"
+          id="myModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Enter the values</h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <label for="firstname">Firstname</label>
+                <input type="text" id="firstname" name="firstname" [(ngModel)] = "input_firstname"/>
+                <hr>
+                <label for="firstname">Lastname</label>
+                <input type="text" id="lastname" name="lastname" [(ngModel)] = "input_lastname"/>
+                <hr>
+                <label for="firstname">Technology</label>
+                <input type="text" id="technology" name="technology" [(ngModel)] = "input_tech"/>
+                <hr>
+                <label for="firstname">lead</label>
+                <input type="text" id="lead" name="lead" [(ngModel)] = "input_lead"/>
+                <hr>
+                <label for="firstname">email</label>
+                <input type="email" id="email" name="email" [(ngModel)] = "input_email"/>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                  Close
+                </button>
+                <button type="button" class="btn btn-primary" (click)="submit()">
+                  Submit
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="col-lg-12">
+        <div class="card mb-12">
+          <div class="card-body text-center">
+            <table class="table">
+              <thead class="table-dark gradient-custom">
+              <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Technology</th>
+                <th>Lead</th>
+                <th>Email</th>
+                <th>Action</th>
+                <th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let dt of data">
+                <ng-container *ngIf="dt.lead===lead || lead==='All' || dt.technology===tech || tech==='All'">
+                  <td>{{dt.firstname}}</td>
+                  <td>{{dt.lastname}}</td>
+                  <td>{{dt.technology}}</td>
+                  <td>{{dt.lead}}</td>
+                  <td>{{dt.email}}</td>
+                  <td><button (click) ="delete(dt.email)">Delete</button></td>
+                </ng-container>  
+              </tr>
+              </tbody>
+          </table> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
