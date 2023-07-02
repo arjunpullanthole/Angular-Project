@@ -1,20 +1,18 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { HeaderComponent } from './header/header.component';
 import { ProfileComponent } from './profile/profile.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { FormsModule } from '@angular/forms';
 import { EntriesComponent } from './entries/entries.component';
+import { DisplayModule } from './display/display.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HeaderComponent,
     ProfileComponent,
     NavigationComponent,
     EntriesComponent
@@ -22,7 +20,8 @@ import { EntriesComponent } from './entries/entries.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    DisplayModule
   ],
   providers: [],
   bootstrap: [AppComponent]

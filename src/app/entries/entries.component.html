@@ -92,26 +92,27 @@
         <div class="card mb-12">
           <div class="card-body text-center">
             <table class="table">
-              <thead class="table-dark gradient-custom">
+              <thead class="table-dark">
               <tr>
+                <th>Sl No:</th>
                 <th>Firstname</th>
                 <th>Lastname</th>
                 <th>Technology</th>
                 <th>Lead</th>
                 <th>Email</th>
                 <th>Action</th>
-                <th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let dt of data">
+              <tr *ngFor="let dt of data; index as i">
                 <ng-container *ngIf="dt.lead===lead || lead==='All' || dt.technology===tech || tech==='All'">
+                  <td>{{i}}</td>
                   <td>{{dt.firstname}}</td>
                   <td>{{dt.lastname}}</td>
                   <td>{{dt.technology}}</td>
                   <td>{{dt.lead}}</td>
                   <td>{{dt.email}}</td>
-                  <td><button (click) ="delete(dt.email)">Delete</button></td>
+                  <td><button class="btn btn-primary btn-block fa-lg gradient-custom" (click) ="delete(dt.email)">Delete</button></td>
                 </ng-container>  
               </tr>
               </tbody>

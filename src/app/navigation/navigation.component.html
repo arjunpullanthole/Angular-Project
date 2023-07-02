@@ -5,10 +5,10 @@
       <div class="position-sticky">
         <div class="list-group list-group-flush mx-3 mt-4">
           <a [routerLink]="'entries'" class="list-group-item list-group-item-action py-2 ripple">
-            <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Main dashboard</span></a>
-          <a [routerLink]="'.'" class="list-group-item list-group-item-action py-2 ripple">
-            <i class="fas fa-lock fa-fw me-3"></i><span>Submissions</span></a>
-          <a [routerLink]="'.'" class="list-group-item list-group-item-action py-2 ripple">
+            <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Submissions</span></a>
+          <a [routerLink]="'display/leads'" class="list-group-item list-group-item-action py-2 ripple">
+            <i class="fas fa-lock fa-fw me-3"></i><span>Leads</span></a>
+          <a [routerLink]="'display/vendors'" class="list-group-item list-group-item-action py-2 ripple">
             <i class="fas fa-chart-line fa-fw me-3"></i><span>Vendors</span></a>
         </div>
       </div>
@@ -20,24 +20,19 @@
       <!-- Container wrapper -->
       <div class="container-fluid">
         <!-- Brand -->
-        <a class="navbar-brand" [routerLink]="'.'">
-          <img src="../../assets/lotus.webp" height="25" alt="Logo"
-            loading="lazy" />
+        <a class="navbar-brand">
+            <img src="../../assets/DP.jpg" [routerLink]="'.'" class="rounded-circle" height="50" alt="Avatar" loading="lazy" />
         </a>
         <!-- Right links -->
         <ul class="navbar-nav ms-auto d-flex flex-row">
           <!-- Icon -->
-          <li class="nav-item">
-            <a class="nav-link me-3 me-lg-0" [routerLink]="'profile'">
-              <i class="fas fa-fill-drip">Profile</i>
-            </a>
+          <li>
+            <a class="nav-link hidden-arrow d-flex align-items-center" style="color:white" [routerLink]="'profile'">
+              Profile</a>
           </li>
-          <!-- Avatar -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center" (click)="logout()"
-              role="button" data-mdb-toggle="dropdown" aria-expanded="false">Logout
-              <img src="../../assets/DP.jpg" class="rounded-circle"
-                height="22" alt="Avatar" loading="lazy" /></a>
+          <li>
+            <a class="nav-link hidden-arrow d-flex align-items-center" style="color:white" (click)="logout()"
+              role="button" aria-expanded="false">Logout</a>
           </li>
         </ul>
       </div>
