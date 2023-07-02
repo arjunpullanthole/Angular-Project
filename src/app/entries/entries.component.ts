@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
+import { StorageService } from '../storage.service';
 declare var window: any;
 @Component({
   selector: 'app-entries',
@@ -7,6 +8,14 @@ declare var window: any;
   styleUrls: ['./entries.component.css']
 })
 export class EntriesComponent implements OnInit{
+
+  constructor(private storage:StorageService){}
+
+  isAdmin()
+  {
+    return this.storage.getrole() === "Admin";
+  }
+  
   formModal: any;
   ngOnInit(): void {
     this.formModal = new window.bootstrap.Modal(

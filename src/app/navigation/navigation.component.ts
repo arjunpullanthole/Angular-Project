@@ -14,5 +14,9 @@ export class NavigationComponent {
     this.storage.changeAuth();
     this.router.navigate(['/login']);
   }
+  isAdmin()
+  {
+    return this.storage.getrole() === "Admin";
+  }
 
 }

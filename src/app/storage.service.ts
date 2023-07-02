@@ -7,6 +7,16 @@ import { BehaviorSubject } from 'rxjs';
 export class StorageService {
   constructor() { }
   public auth = new BehaviorSubject<boolean>(false);
+  public role = new BehaviorSubject<string>("User");
+
+  public setrole(val:string)
+  {
+    this.role.next(val);
+  }
+  public getrole()
+  {
+    return this.role.value;
+  }
 
   public changeAuth()
   {
@@ -16,7 +26,7 @@ export class StorageService {
   {
     this.auth.next(val);
   }
-  public getAuth()
+  public isAuth()
   {
     return this.auth.value;
   }

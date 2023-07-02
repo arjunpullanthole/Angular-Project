@@ -16,7 +16,9 @@ const routes: Routes = [
     {path: '',redirectTo: 'entries',pathMatch: 'full'},
     {path: "profile",component: ProfileComponent},
     {path: "entries",component: EntriesComponent},
-    {path: "display",loadChildren: () => import('./display/display.module').then(m => m.DisplayModule)}
+    {path: "display",
+    loadChildren: () => import('./display/display.module').then(m => m.DisplayModule),
+    data:{roles:["Admin"]},canActivate:[actGuard]}
   ]
   }
 ];
