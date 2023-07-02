@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { StorageService } from '../storage.service';
 
@@ -7,16 +7,28 @@ import { StorageService } from '../storage.service';
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.css']
 })
-export class NavigationComponent {
+export class NavigationComponent implements OnInit{
   constructor(private storage:StorageService,private router:Router){}
+  mode :any;
+  ngOnInit(): void {
+    this.storage.mode.subscribe(x => this.mode = x);
+  }
   logout()
   {
     this.storage.changeAuth();
     this.router.navigate(['/login']);
   }
-  isAdmin()
+  isAdminView()
   {
-    return this.storage.getrole() === "Admin";
+    return this.storage.getrole() === "Admin" && this.storage.getmode() === "Admin" ;
+  }
+  toggleview()
+  {
+    if (this.storage.getrole() === "Admin")
+    {
+      this.storage.togglemode();
+      this.router.navigate(['/main/entries']);
+    }
   }
 
 }

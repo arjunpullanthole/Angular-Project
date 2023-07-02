@@ -11,9 +11,9 @@ export class EntriesComponent implements OnInit{
 
   constructor(private storage:StorageService){}
 
-  isAdmin()
+  isAdminView()
   {
-    return this.storage.getrole() === "Admin";
+    return this.storage.getrole() === "Admin" && this.storage.getmode() === "Admin" ;
   }
   
   formModal: any;

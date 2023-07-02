@@ -6,9 +6,9 @@
         <div class="list-group list-group-flush mx-3 mt-4">
           <a [routerLink]="'entries'" class="list-group-item list-group-item-action py-2 ripple">
             <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Submissions</span></a>
-          <a [routerLink]="'display/leads'" *ngIf="isAdmin()" class="list-group-item list-group-item-action py-2 ripple">
+          <a [routerLink]="'display/leads'" *ngIf="isAdminView()" class="list-group-item list-group-item-action py-2 ripple">
             <i class="fas fa-lock fa-fw me-3"></i><span>Leads</span></a>
-          <a [routerLink]="'display/vendors'" *ngIf="isAdmin()" class="list-group-item list-group-item-action py-2 ripple">
+          <a [routerLink]="'display/vendors'" *ngIf="isAdminView()" class="list-group-item list-group-item-action py-2 ripple">
             <i class="fas fa-chart-line fa-fw me-3"></i><span>Vendors</span></a>
         </div>
       </div>
@@ -26,7 +26,7 @@
         <!-- Right links -->
         <ul class="navbar-nav ms-auto d-flex flex-row">
           <li>
-            <button *ngIf="isAdmin()" type="button" class="btn btn-danger">Admin</button>
+            <button (click)="toggleview()" type="button" class="btn btn-danger">{{mode}}</button>
             </li>
           <li>
             <a class="nav-link hidden-arrow d-flex align-items-center" style="color:white" [routerLink]="'profile'">

@@ -24,6 +24,7 @@ export class LoginService {
     {  
       this.storage.changeAuth();
       this.storage.setrole(user.role);
+      this.storage.setmode(user.role);
     }
     return of(this.storage.auth);
   }
