@@ -64,13 +64,19 @@
                   <tr>
                     <td><div class="input-group mb-4">
                       <label class="input-group-text" for="firstname">First Name</label>
-                      <input [(ngModel)] = "input_firstname" name="lastname" type="text" id="firstname" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
+                      <input [(ngModel)] = "input_firstname" name="firstname" type="text" id="firstname" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
                     </div></td>
                   </tr>
                   <tr>
                     <td><div class="input-group mb-4">
                       <label class="input-group-text" for="lastname">Last Name</label>
                       <input [(ngModel)] = "input_lastname" name="lastname" type="text" id="lastname" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
+                    </div></td>
+                  </tr>
+                  <tr>
+                    <td><div class="input-group mb-4">
+                      <label class="input-group-text" for="vendor">Vendor</label>
+                      <input [(ngModel)] = "input_vendor" name="vendor" type="text" id="vendor" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
                     </div></td>
                   </tr>
                   <tr>
@@ -115,6 +121,7 @@
                 <th>Sl No:</th>
                 <th>Firstname</th>
                 <th>Lastname</th>
+                <th>Vendor</th>
                 <th>Technology</th>
                 <th>Lead</th>
                 <th>Email</th>
@@ -127,10 +134,91 @@
                   <td>{{i}}</td>
                   <td>{{dt.firstname}}</td>
                   <td>{{dt.lastname}}</td>
+                  <td>{{dt.vendor}}</td>
                   <td>{{dt.technology}}</td>
                   <td>{{dt.lead}}</td>
                   <td>{{dt.email}}</td>
-                  <td *ngIf="isAdminView()"><button class="btn btn-primary btn-block fa-lg gradient-custom" (click) ="delete(dt.email)">Delete</button></td>
+                  <td *ngIf="isAdminView()">
+                    <!-- Modal for edit begin -->
+                    <div class="mx-auto">
+                      <div class="btn-group">
+                        <button type="button" (click)="editFormModal(i)" class="btn btn-primary btn-block fa-lg gradient-custom">
+                          Edit</button>
+                        <button class="btn btn-primary btn-block fa-lg gradient-custom" (click) ="delete(dt.email)">Delete</button>
+                      </div>  
+                    <!--form modal-->
+                      <div
+                        class="modal fade"
+                        id="editModal{{i}}"
+                        tabindex="-1"
+                        aria-labelledby="exampleModalLabel"
+                        aria-hidden="true"
+                      >
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Edit the values</h5>
+                              <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                              ></button>
+                            </div>
+                            <div class="modal-body">
+                              <table>
+                                <tr>
+                                  <td><div class="input-group mb-4">
+                                    <label class="input-group-text" for="firstname">First Name</label>
+                                    <input value = "{{dt.firstname}}" name="firstname" type="text" id="firstname" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
+                                  </div></td>
+                                </tr>
+                                <tr>
+                                  <td><div class="input-group mb-4">
+                                    <label class="input-group-text" for="lastname">Last Name</label>
+                                    <input value = "{{dt.lastname}}" name="lastname" type="text" id="lastname" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
+                                  </div></td>
+                                </tr>
+                                <tr>
+                                  <td><div class="input-group mb-4">
+                                    <label class="input-group-text" for="vendor">Vendor</label>
+                                    <input value = "{{dt.vendor}}" name="vendor" type="text" id="vendor" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
+                                  </div></td>
+                                </tr>
+                                <tr>
+                                  <td><div class="input-group mb-4">
+                                    <label class="input-group-text" for="technology">Technology</label>
+                                    <input value = "{{dt.technology}}" name="technology" type="text" id="technology" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
+                                  </div></td>
+                                </tr>
+                                <tr>
+                                  <td><div class="input-group mb-4">
+                                    <label class="input-group-text" for="lead">Lead</label>
+                                    <input value = "{{dt.lead}}" name="lead" type="text" id="lead" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
+                                  </div></td>
+                                </tr>
+                                <tr>
+                                  <td><div class="input-group mb-4">
+                                    <label class="input-group-text" for="email">Email</label>
+                                    <input value = "{{dt.email}}" name="email" type="email" id="email" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
+                                  </div></td>
+                                </tr>
+                              </table>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                Close
+                              </button>
+                              <button type="button" class="btn btn-primary" (click)="edit(i)">
+                                Submit
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+                    <!-- Modal end -->
+                  </td>
                 </ng-container>  
               </tr>
               </tbody>
