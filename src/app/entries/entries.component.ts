@@ -20,27 +20,30 @@ export class EntriesComponent implements OnInit{
 
   formModal: any;
   editModal:any;
-  input_firstname="";
-  input_lastname="";
+  input_name="";
+  input_rate="";
   input_vendor="";
+  input_impl="";
   input_tech="";
   input_lead="";
-  input_email="";
+  input_status="";
   lead ="Lead";
   tech = "Technology";
   leads = ["Praveen","Tejan","Sagar","Raj","Jagesh","Manohar","Vinay","Spandana","Kranthi","All"];
   techs = ["Java","Angular","SQL","All"];
   data = [
-    {firstname:"Arjun",lastname:"Pullanthole",vendor:"vendor1",technology:"All",lead:"Praveen",email:"arjun@gmail.com"},
-    {firstname:"Satish",lastname:"Anil",vendor:"vendor2",technology:"Angular",lead:"Tejan",email:"satish@gmail.com"},
-    {firstname:"Naveen",lastname:"Menon",vendor:"vendor3",technology:"SQL",lead:"Sagar",email:"naveen@gmail.com"},
-    {firstname:"Sunil",lastname:"Nair",vendor:"vendor4",technology:"Java",lead:"Raj",email:"sunil@gmail.com"},
-    {firstname:"prav",lastname:"patel",vendor:"vendor5",technology:"SQL",lead:"Jagesh",email:"prav@gmail.com"},
-    {firstname:"kavin",lastname:"lal",vendor:"vendor6",technology:"Angular",lead:"Manohar",email:"kavin@gmail.com"},
-    {firstname:"roshan",lastname:"kaur",vendor:"vendor7",technology:"All",lead:"Vinay",email:"roshan@gmail.com"},
-    {firstname:"sam",lastname:"kris",vendor:"vendor8",technology:"Java",lead:"Spandana",email:"sam@gmail.com"},
-    {firstname:"jim",lastname:"bean",vendor:"vendor9",technology:"SQL",lead:"Kranthi",email:"jijm@gmail.com"}
+    {name: "Arjun",rate: "95",vendor: "vendor1",implementation: "TCS",technology: "Angular",lead: "Praveen",status: "CONFIRMED"},
+    {name: "John",rate: "80",vendor: "vendor2",implementation: "Infosys",technology: "React",lead: "Tejan",status: "CONFIRMED"},
+    {name: "Emily",rate: "90",vendor: "vendor3",implementation: "Wipro",technology: "Vue.js",lead: "Sagar",status: "CONFIRMED"},
+    {name: "David",rate: "85",vendor: "vendor4",implementation: "Accenture",technology: "Node.js",lead: "Raj",status: "CONFIRMED"},
+    {name: "Sophia",rate: "92",vendor: "vendor5",implementation: "IBM",technology: "Java",lead: "Jagesh",status: "CONFIRMED"},
+    {name: "Liam",rate: "88",vendor: "vendor6",implementation: "Cognizant",technology: "Python",lead: "Manohar",status: "CONFIRMED"},
+    {name: "Ava",rate: "93",vendor: "vendor7",implementation: "Capgemini",technology: "C#",lead: "Vinay",status: "CONFIRMED"},
+    {name: "Mia",rate: "87",vendor: "vendor8",implementation: "Deloitte",technology: "Ruby",lead: "Spandana",status: "CONFIRMED"},
+    {name: "Noah",rate: "96",vendor: "vendor9",implementation: "PwC",technology: "PHP",lead: "Kranthi",status: "CONFIRMED"},
+    {name: "Isabella",rate: "91",vendor: "vendor10",implementation: "Ernst & Young",technology: "HTML/CSS",lead: "Praveen",status: "CONFIRMED"}
   ]
+  
   
   openFormModal() {
     this.formModal.show();
@@ -61,36 +64,40 @@ export class EntriesComponent implements OnInit{
   {
     this.editModal.hide();
     var form = document.getElementById('editModal'+index);
-    var fname = form?.getElementsByTagName('input').namedItem('firstname')?.value;
-    var lname = form?.getElementsByTagName('input').namedItem('lastname')?.value;
-    var vdr = form?.getElementsByTagName('input').namedItem('vendor')?.value;
-    var tech = form?.getElementsByTagName('input').namedItem('technology')?.value;
-    var ld = form?.getElementsByTagName('input').namedItem('lead')?.value;
-    var eml = form?.getElementsByTagName('input').namedItem('email')?.value;
+    var nm = form?.getElementsByTagName('input').namedItem('name'+index)?.value;
+    var rt = form?.getElementsByTagName('input').namedItem('rate'+index)?.value;
+    var vdr = form?.getElementsByTagName('input').namedItem('vendor'+index)?.value;
+    var impl = form?.getElementsByTagName('input').namedItem('implementation'+index)?.value;
+    var tech = form?.getElementsByTagName('input').namedItem('technology'+index)?.value;
+    var ld = form?.getElementsByTagName('input').namedItem('lead'+index)?.value;
+    var st = form?.getElementsByTagName('input').namedItem('status'+index)?.value;
     this.data[index] = {
-      firstname:fname?fname:'',
-      lastname:lname ? lname:'',
+      name:nm?nm:'',
+      rate:rt ? rt:'',
       vendor:vdr? vdr:'',
+      implementation:impl?impl:'',
       technology:tech?tech:'',
       lead:ld?ld:'',
-      email:eml?eml:''}
+      status:st?st:''}
   }
   
   submit() {
     this.formModal.hide();
     this.data.push({
-      firstname:this.input_firstname,
-      lastname:this.input_lastname,
-      technology:this.input_tech,
+      name:this.input_name,
+      rate:this.input_rate,
       vendor:this.input_vendor,
+      technology:this.input_tech,
+      implementation:this.input_impl,
       lead:this.input_lead,
-      email:this.input_email})
-      this.input_firstname="";
-      this.input_lastname="";
+      status:this.input_status})
+      this.input_name="";
+      this.input_rate="";
       this.input_vendor="";
+      this.input_impl="";
       this.input_tech="";
       this.input_lead="";
-      this.input_email="";
+      this.input_status="";
   }
   
   getSelectedLead(val:string)
@@ -101,8 +108,8 @@ export class EntriesComponent implements OnInit{
   {
     this.tech = val;
   }
-  delete(val:string)
+  delete(i:number)
   {
-    this.data = this.data.filter(obj => obj.email!==val);
+    this.data.splice(i,1);
   }
 }

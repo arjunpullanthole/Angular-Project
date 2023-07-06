@@ -1,117 +1,124 @@
 <section style="background-color: #eee;">
   <div class="container py-5">
-    <div class="row">
-      <div class="d-grid col-4 mx-auto">
-        <div class="btn-group">
-          <button type="button" class="btn btn-secondary gradient-custom">{{lead}}</button>
-          <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split gradient-custom" data-bs-toggle="dropdown" aria-expanded="false">
-            <span class="visually-hidden">Toggle Dropdown</span>
-          </button>
-          <ul class="dropdown-menu">
-            <li  *ngFor="let ld of leads">
-              <a *ngIf="ld !== 'All'; else allLead" class="dropdown-item" (click)="getSelectedLead(ld)">{{ld}}</a></li>
-            <ng-template #allLead>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" (click)="getSelectedLead('All')">All</a></li>
-            </ng-template>
-          </ul>
-        </div>
-      </div>
-      <div class="d-grid col-4 mx-auto">
-        <div class="btn-group">
-          <button type="button" class="btn btn-secondary gradient-custom">{{tech}}</button>
-          <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split gradient-custom" data-bs-toggle="dropdown" aria-expanded="false">
-            <span class="visually-hidden">Toggle Dropdown</span>
-          </button>
-          <ul class="dropdown-menu">
-            <li *ngFor="let tc of techs">
-              <a *ngIf="tc !== 'All'; else allTech" class="dropdown-item" (click)="getSelectedTech(tc)">{{tc}}</a></li>
-              <ng-template #allTech>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" (click)="getSelectedTech('All')">All</a></li>
-              </ng-template>
-          </ul>
-        </div>
-      </div>
-      <!-- Modal to add value -->
-      <div class="d-grid col-4 mx-auto">
-          <div class="btn-group">
-            <button type="button" (click)="openFormModal()" class="btn btn-secondary gradient-custom">
-              Add
-            </button>
-          </div>  
-        <!--form modal-->
-        <div
-          class="modal fade"
-          id="myModal"
-          tabindex="-1"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Enter the values</h5>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
+    <div class="col-lg-12">
+      <div class="card mb-12">
+        <div class="card-body text-center">
+          <div class="row">
+            <div class="d-grid col-2 mx-auto">
+              <div class="btn-group">
+                <button type="button" class="btn btn-primary dropdown-toggle gradient-custom" data-bs-toggle="dropdown" aria-expanded="false">
+                  {{lead}} </button>
+                <ul class="dropdown-menu col-4 mx-auto">
+                  <li  *ngFor="let ld of leads">
+                    <a *ngIf="ld !== 'All'; else allLead" class="dropdown-item" (click)="getSelectedLead(ld)">{{ld}}</a></li>
+                    <ng-template #allLead>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" (click)="getSelectedLead('All')">All</a></li>
+                    </ng-template>
+                </ul>
               </div>
-              <div class="modal-body">
-                <table>
-                  <tr>
-                    <td><div class="input-group mb-4">
-                      <label class="input-group-text" for="firstname">First Name</label>
-                      <input [(ngModel)] = "input_firstname" name="firstname" type="text" id="firstname" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
-                    </div></td>
-                  </tr>
-                  <tr>
-                    <td><div class="input-group mb-4">
-                      <label class="input-group-text" for="lastname">Last Name</label>
-                      <input [(ngModel)] = "input_lastname" name="lastname" type="text" id="lastname" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
-                    </div></td>
-                  </tr>
-                  <tr>
-                    <td><div class="input-group mb-4">
-                      <label class="input-group-text" for="vendor">Vendor</label>
-                      <input [(ngModel)] = "input_vendor" name="vendor" type="text" id="vendor" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
-                    </div></td>
-                  </tr>
-                  <tr>
-                    <td><div class="input-group mb-4">
-                      <label class="input-group-text" for="technology">Technology</label>
-                      <input [(ngModel)] = "input_tech" name="technology" type="text" id="technology" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
-                    </div></td>
-                  </tr>
-                  <tr>
-                    <td><div class="input-group mb-4">
-                      <label class="input-group-text" for="lead">Lead</label>
-                      <input [(ngModel)] = "input_lead" name="lead" type="text" id="lead" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
-                    </div></td>
-                  </tr>
-                  <tr>
-                    <td><div class="input-group mb-4">
-                      <label class="input-group-text" for="email">Email</label>
-                      <input [(ngModel)] = "input_email" name="email" type="email" id="email" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
-                    </div></td>
-                  </tr>
-                </table>
+            </div>
+            <div class="d-grid col-2 mx-auto">
+              <div class="btn-group">
+                <button type="button" class="btn btn-secondary dropdown-toggle gradient-custom" data-bs-toggle="dropdown" aria-expanded="false">
+                  {{tech}} </button>
+                <ul class="dropdown-menu">
+                  <li *ngFor="let tc of techs">
+                    <a *ngIf="tc !== 'All'; else allTech" class="dropdown-item" (click)="getSelectedTech(tc)">{{tc}}</a></li>
+                    <ng-template #allTech>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" (click)="getSelectedTech('All')">All</a></li>
+                    </ng-template>
+                </ul>
               </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                  Close
-                </button>
-                <button type="button" class="btn btn-primary" (click)="submit()">
-                  Submit
-                </button>
+            </div>
+            <!-- Modal to add value -->
+            <div class="d-grid col-2 mx-auto">
+                <div class="btn-group">
+                  <button type="button" (click)="openFormModal()" class="btn btn-secondary gradient-custom">
+                    Add
+                  </button>
+                </div>  
+              <!--form modal-->
+              <div
+                class="modal fade"
+                id="myModal"
+                tabindex="-1"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Enter the values</h5>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div class="modal-body">
+                      <table>
+                        <tr>
+                          <td><div class="input-group mb-4">
+                            <label class="input-group-text d-flex justify-content-center" style="width: 150px;" for="name">Name</label>
+                            <input [(ngModel)] = "input_name" name="name" type="text" id="name" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
+                          </div></td>
+                        </tr>
+                        <tr>
+                          <td><div class="input-group mb-4">
+                            <label class="input-group-text d-flex justify-content-center" style="width: 150px;" for="rate">Rate</label>
+                            <input [(ngModel)] = "input_rate" name="rate" type="text" id="rate" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
+                          </div></td>
+                        </tr>
+                        <tr>
+                          <td><div class="input-group mb-4">
+                            <label class="input-group-text d-flex justify-content-center" style="width: 150px;" for="vendor">Vendor</label>
+                            <input [(ngModel)] = "input_vendor" name="vendor" type="text" id="vendor" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
+                          </div></td>
+                        </tr>
+                        <tr>
+                          <td><div class="input-group mb-4">
+                            <label class="input-group-text d-flex justify-content-center" style="width: 150px;" for="implementation">Implementation</label>
+                            <input [(ngModel)] = "input_impl" name="implementation" type="text" id="implementation" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
+                          </div></td>
+                        </tr>
+                        <tr>
+                          <td><div class="input-group mb-4">
+                            <label class="input-group-text d-flex justify-content-center" style="width: 150px;" for="technology">Technology</label>
+                            <input [(ngModel)] = "input_tech" name="technology" type="text" id="technology" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
+                          </div></td>
+                        </tr>
+                        <tr>
+                          <td><div class="input-group mb-4">
+                            <label class="input-group-text d-flex justify-content-center" style="width: 150px;" for="lead">Lead</label>
+                            <input [(ngModel)] = "input_lead" name="lead" type="text" id="lead" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
+                          </div></td>
+                        </tr>
+                        <tr>
+                          <td><div class="input-group mb-4">
+                            <label class="input-group-text d-flex justify-content-center" style="width: 150px;" for="status">Status</label>
+                            <input [(ngModel)] = "input_status" name="status" type="text" id="status" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
+                          </div></td>
+                        </tr>
+                      </table>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Close
+                      </button>
+                      <button type="button" class="btn btn-primary" (click)="submit()">
+                        Submit
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <hr>
       <div class="col-lg-12">
         <div class="card mb-12">
           <div class="card-body text-center">
@@ -119,12 +126,13 @@
               <thead class="table-dark">
               <tr>
                 <th>Sl No:</th>
-                <th>Firstname</th>
-                <th>Lastname</th>
+                <th>Name</th>
+                <th>Rate</th>
                 <th>Vendor</th>
+                <th>Implementation</th>
                 <th>Technology</th>
                 <th>Lead</th>
-                <th>Email</th>
+                <th>Status</th>
                 <th *ngIf="isAdminView()">Action</th>
               </tr>
             </thead>
@@ -132,19 +140,20 @@
               <tr *ngFor="let dt of data; index as i">
                 <ng-container *ngIf="dt.lead===lead || lead==='All' || dt.technology===tech || tech==='All'">
                   <td>{{i}}</td>
-                  <td>{{dt.firstname}}</td>
-                  <td>{{dt.lastname}}</td>
+                  <td>{{dt.name}}</td>
+                  <td>{{dt.rate}}</td>
                   <td>{{dt.vendor}}</td>
+                  <td>{{dt.implementation}}</td>
                   <td>{{dt.technology}}</td>
                   <td>{{dt.lead}}</td>
-                  <td>{{dt.email}}</td>
+                  <td>{{dt.status}}</td>
                   <td *ngIf="isAdminView()">
                     <!-- Modal for edit begin -->
                     <div class="mx-auto">
                       <div class="btn-group">
-                        <button type="button" (click)="editFormModal(i)" class="btn btn-primary btn-block fa-lg gradient-custom">
+                        <button type="button" (click)="editFormModal(i)" class="btn btn-warning btn-block fa-lg">
                           Edit</button>
-                        <button class="btn btn-primary btn-block fa-lg gradient-custom" (click) ="delete(dt.email)">Delete</button>
+                        <button class="btn btn-danger btn-block fa-lg" (click) ="delete(i)">Delete</button>
                       </div>  
                     <!--form modal-->
                       <div
@@ -169,38 +178,44 @@
                               <table>
                                 <tr>
                                   <td><div class="input-group mb-4">
-                                    <label class="input-group-text" for="firstname">First Name</label>
-                                    <input value = "{{dt.firstname}}" name="firstname" type="text" id="firstname" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
+                                    <label class="input-group-text d-flex justify-content-center" style="width: 150px;" for="name{{i}}">Name</label>
+                                    <input value="{{dt.name}}" name="name{{i}}" type="text" id="name{{i}}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
                                   </div></td>
                                 </tr>
                                 <tr>
                                   <td><div class="input-group mb-4">
-                                    <label class="input-group-text" for="lastname">Last Name</label>
-                                    <input value = "{{dt.lastname}}" name="lastname" type="text" id="lastname" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
+                                    <label class="input-group-text d-flex justify-content-center" style="width: 150px;" for="rate{{i}}">Rate</label>
+                                    <input value="{{dt.rate}}" name="rate{{i}}" type="text" id="rate{{i}}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
                                   </div></td>
                                 </tr>
                                 <tr>
                                   <td><div class="input-group mb-4">
-                                    <label class="input-group-text" for="vendor">Vendor</label>
-                                    <input value = "{{dt.vendor}}" name="vendor" type="text" id="vendor" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
+                                    <label class="input-group-text d-flex justify-content-center" style="width: 150px;" for="vendor{{i}}">Vendor</label>
+                                    <input value="{{dt.vendor}}" name="vendor{{i}}" type="text" id="vendor{{i}}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
                                   </div></td>
                                 </tr>
                                 <tr>
                                   <td><div class="input-group mb-4">
-                                    <label class="input-group-text" for="technology">Technology</label>
-                                    <input value = "{{dt.technology}}" name="technology" type="text" id="technology" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
+                                    <label class="input-group-text d-flex justify-content-center" style="width: 150px;" for="implementation{{i}}">Implementation</label>
+                                    <input value="{{dt.implementation}}" name="implementation{{i}}" type="text" id="implementation{{i}}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
                                   </div></td>
                                 </tr>
                                 <tr>
                                   <td><div class="input-group mb-4">
-                                    <label class="input-group-text" for="lead">Lead</label>
-                                    <input value = "{{dt.lead}}" name="lead" type="text" id="lead" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
+                                    <label class="input-group-text d-flex justify-content-center" style="width: 150px;" for="technology{{i}}">Technology</label>
+                                    <input value="{{dt.technology}}" name="technology{{i}}" type="text" id="technology{{i}}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
                                   </div></td>
                                 </tr>
                                 <tr>
                                   <td><div class="input-group mb-4">
-                                    <label class="input-group-text" for="email">Email</label>
-                                    <input value = "{{dt.email}}" name="email" type="email" id="email" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
+                                    <label class="input-group-text d-flex justify-content-center" style="width: 150px;" for="lead{{i}}">Lead</label>
+                                    <input value="{{dt.lead}}" name="lead{{i}}" type="text" id="lead{{i}}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
+                                  </div></td>
+                                </tr>
+                                <tr>
+                                  <td><div class="input-group mb-4">
+                                    <label class="input-group-text d-flex justify-content-center" style="width: 150px;" for="status{{i}}">Status</label>
+                                    <input value="{{dt.status}}" name="status{{i}}" type="text" id="status{{i}}" class="form-control " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
                                   </div></td>
                                 </tr>
                               </table>
@@ -216,7 +231,7 @@
                           </div>
                         </div>
                       </div>
-                  </div>
+                    </div>
                     <!-- Modal end -->
                   </td>
                 </ng-container>  

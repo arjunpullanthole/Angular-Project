@@ -10,6 +10,8 @@
             <i class="fas fa-lock fa-fw me-3"></i><span>Leads</span></a>
           <a [routerLink]="'display/vendors'" *ngIf="isAdminView()" class="list-group-item list-group-item-action py-2 ripple">
             <i class="fas fa-chart-line fa-fw me-3"></i><span>Vendors</span></a>
+            <a [routerLink]="'display/students'" *ngIf="isAdminView()" class="list-group-item list-group-item-action py-2 ripple">
+              <i class="fas fa-chart-line fa-fw me-3"></i><span>Students</span></a>
         </div>
       </div>
     </nav>

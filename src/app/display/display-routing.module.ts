@@ -2,11 +2,13 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LeadsComponent} from './Leads/leads.component';
 import { VendorsComponent } from './vendors/vendors.component';
+import { StudentsComponent } from './students/students.component';
 
 const routes: Routes = [
     {path: '',redirectTo: 'leads',pathMatch: 'full'},
     {path: 'vendors',component: VendorsComponent},
-    {path: 'leads',component: LeadsComponent}
+    {path: 'leads',component: LeadsComponent},
+    {path: 'students',component: StudentsComponent}
   ];
 
 @NgModule({

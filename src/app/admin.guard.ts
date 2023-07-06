@@ -2,9 +2,12 @@ import { CanActivateFn } from '@angular/router';
 import { StorageService } from './storage.service';
 import { inject} from '@angular/core';
 
-export const actGuard: CanActivateFn = (route, state) => {
+export const adminGuard: CanActivateFn = (route, state) => {
   const storage = inject(StorageService);
-  if (!storage.isAuth())
+  const { roles } = route.data;
+  if (roles && !roles.includes(storage.getrole()))
+  {
     return false;
+  }
   return true;
 };
