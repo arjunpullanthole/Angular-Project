@@ -9,6 +9,8 @@
             <tr>
                 <th>Sl No:</th>
                 <th>Name</th>
+                <th>Technology</th>
+                <th>E-mail</th>
                 <th>Action</th>
             </tr>
             </thead>
@@ -16,8 +18,10 @@
             <tr *ngFor="let ld of leads; index as i">
                 <ng-container>
                     <td>{{i}}</td>
-                <td>{{ld}}</td>
-                <td><button class="btn btn-primary btn-block fa-lg gradient-custom" (click) ="delete(ld)">Delete</button></td>
+                <td>{{ld.name}}</td>
+                <td>{{ld.technology}}</td>
+                <td>{{ld.email}}</td>
+                <td><button class="btn btn-danger btn-block fa-lg " (click) ="delete(ld.email)">Delete</button></td>
                 </ng-container>  
             </tr>
             </tbody>

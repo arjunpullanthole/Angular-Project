@@ -20,7 +20,7 @@ const routes: Routes = [
     {path: "display",
     loadChildren: () => import('./display/display.module').then(m => m.DisplayModule),
     data:{roles:["Admin"]},canActivate:[adminGuard]}
-    // data:{roles:["Admin"]}}
+    //data:{roles:["Admin"]}}
   ]
   }
 ];

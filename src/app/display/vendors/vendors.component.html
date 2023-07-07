@@ -9,6 +9,8 @@
             <tr>
                 <th>Sl No:</th>
                 <th>Name</th>
+                <th>E-mail</th>
+                <th>Phone</th>
                 <th>Action</th>
             </tr>
             </thead>
@@ -16,8 +18,10 @@
             <tr *ngFor="let vd of vendors; index as i">
                 <ng-container>
                 <td>{{i}}</td>
-                <td>{{vd}}</td>
-                <td><button class="btn btn-primary btn-block fa-lg gradient-custom" (click) ="delete(vd)">Delete</button></td>
+                <td>{{vd.name}}</td>
+                <td>{{vd.email}}</td>
+                <td>{{vd.phone}}</td>
+                <td><button class="btn btn-danger btn-block fa-lg" (click) ="delete(vd.email)">Delete</button></td>
                 </ng-container>  
             </tr>
             </tbody>

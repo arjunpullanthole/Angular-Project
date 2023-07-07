@@ -1,30 +1,73 @@
 <section style="background-color: #eee;">
   <div class="container py-5">
-    <div class="row">
-      <div class="card mb-12">
-          <div class="col-lg-12">
-              <div class="card-body text-center">
-          <table class="table">
-          <thead class="table-dark">
-          <tr>
-              <th>Sl No:</th>
-              <th>Name</th>
-              <th>Action</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let st of students; index as i">
-              <ng-container>
-                  <td>{{i}}</td>
-              <td>{{st}}</td>
-              <td><button class="btn btn-primary btn-block fa-lg gradient-custom" (click) ="delete(st)">Delete</button></td>
-              </ng-container>  
-          </tr>
-          </tbody>
-      </table> 
+    <div class="col-lg-12">
+        <div class="card mb-12">
+            <div class="card-body text-center">
+              <div class="row">
+                <div class="d-grid col-2 mx-auto">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-primary dropdown-toggle gradient-custom" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{lead}} </button>
+                      <ul class="dropdown-menu col-4 mx-auto">
+                        <li  *ngFor="let ld of leads">
+                          <a *ngIf="ld !== 'All'; else allLead" class="dropdown-item" (click)="getSelectedLead(ld)">{{ld}}</a></li>
+                          <ng-template #allLead>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" (click)="getSelectedLead('All')">All</a></li>
+                          </ng-template>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="d-grid col-2 mx-auto">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-secondary dropdown-toggle gradient-custom" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{tech}} </button>
+                      <ul class="dropdown-menu">
+                        <li *ngFor="let tc of techs">
+                          <a *ngIf="tc !== 'All'; else allTech" class="dropdown-item" (click)="getSelectedTech(tc)">{{tc}}</a></li>
+                          <ng-template #allTech>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" (click)="getSelectedTech('All')">All</a></li>
+                          </ng-template>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="d-grid col-2 mx-auto">
+                    <div class="btn-group">
+                      <a [routerLink]="'../add-students'" class="btn btn-primary gradient-custom">Add</a>
+                    </div>
+                  </div>
+              </div>
+            </div>
+        </div>
+      <div class=" card mb-12">
+        <div class="card-body text-center">
+            <div class="row">
+                <table class="table">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Sl No:</th>
+                            <th>Name</th>
+                            <th>lead</th>
+                            <th>Email</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let st of students; index as i">
+                            <ng-container *ngIf="st.lead===lead || lead==='All'|| st.technology===tech || tech==='All'">
+                                <td>{{i}}</td>
+                            <td>{{st.firstname}} {{st.lastname}}</td>
+                            <td>{{st.lead}}</td>
+                            <td>{{st.email}}</td>
+                            <td><button class="btn btn-danger btn-block fa-lg" (click) ="delete(st.email)">Delete</button></td>
+                            </ng-container>  
+                        </tr>
+                    </tbody>
+                </table> 
+            </div>
+        </div>
       </div>
-      </div>
-  </div>
-  </div>
+    </div>
   </div>
 </section>

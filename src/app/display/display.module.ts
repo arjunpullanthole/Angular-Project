@@ -4,6 +4,7 @@ import { DisplayRoutingModule } from './display-routing.module';
 import { VendorsComponent } from './vendors/vendors.component';
 import { LeadsComponent } from './Leads/leads.component';
 import { StudentsComponent } from './students/students.component';
+import { AddStudentsComponent } from './add-students/add-students.component';
 
 
 
@@ -11,12 +12,13 @@ import { StudentsComponent } from './students/students.component';
   declarations: [
     LeadsComponent,
     VendorsComponent,
-    StudentsComponent
+    StudentsComponent,
+    AddStudentsComponent
   ],
   imports: [
     CommonModule,
     DisplayRoutingModule
   ],
-  exports: [LeadsComponent,VendorsComponent,StudentsComponent]
+  exports: [LeadsComponent,VendorsComponent,StudentsComponent,AddStudentsComponent]
 })
 export class DisplayModule { }

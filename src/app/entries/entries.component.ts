@@ -42,7 +42,7 @@ export class EntriesComponent implements OnInit{
     {name: "Mia",rate: "87",vendor: "vendor8",implementation: "Deloitte",technology: "Ruby",lead: "Spandana",status: "CONFIRMED"},
     {name: "Noah",rate: "96",vendor: "vendor9",implementation: "PwC",technology: "PHP",lead: "Kranthi",status: "CONFIRMED"},
     {name: "Isabella",rate: "91",vendor: "vendor10",implementation: "Ernst & Young",technology: "HTML/CSS",lead: "Praveen",status: "CONFIRMED"}
-  ]
+  ];
   
   
   openFormModal() {
