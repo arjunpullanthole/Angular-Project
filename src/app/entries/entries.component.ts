@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { StorageService } from '../storage.service';
 import { DOCUMENT } from '@angular/common';
@@ -16,6 +16,9 @@ export class EntriesComponent implements OnInit{
     this.formModal = new window.bootstrap.Modal(
       document.getElementById('myModal')
     );
+    this.storage.getData().subscribe(response => {
+      this.data = response;
+  });
   }
 
   formModal: any;
@@ -31,20 +34,8 @@ export class EntriesComponent implements OnInit{
   tech = "Technology";
   leads = ["Praveen","Tejan","Sagar","Raj","Jagesh","Manohar","Vinay","Spandana","Kranthi","All"];
   techs = ["Java","Angular","SQL","All"];
-  data = [
-    {name: "Arjun",rate: "95",vendor: "vendor1",implementation: "TCS",technology: "Angular",lead: "Praveen",status: "CONFIRMED"},
-    {name: "John",rate: "80",vendor: "vendor2",implementation: "Infosys",technology: "React",lead: "Tejan",status: "CONFIRMED"},
-    {name: "Emily",rate: "90",vendor: "vendor3",implementation: "Wipro",technology: "Vue.js",lead: "Sagar",status: "CONFIRMED"},
-    {name: "David",rate: "85",vendor: "vendor4",implementation: "Accenture",technology: "Node.js",lead: "Raj",status: "CONFIRMED"},
-    {name: "Sophia",rate: "92",vendor: "vendor5",implementation: "IBM",technology: "Java",lead: "Jagesh",status: "CONFIRMED"},
-    {name: "Liam",rate: "88",vendor: "vendor6",implementation: "Cognizant",technology: "Python",lead: "Manohar",status: "CONFIRMED"},
-    {name: "Ava",rate: "93",vendor: "vendor7",implementation: "Capgemini",technology: "C#",lead: "Vinay",status: "CONFIRMED"},
-    {name: "Mia",rate: "87",vendor: "vendor8",implementation: "Deloitte",technology: "Ruby",lead: "Spandana",status: "CONFIRMED"},
-    {name: "Noah",rate: "96",vendor: "vendor9",implementation: "PwC",technology: "PHP",lead: "Kranthi",status: "CONFIRMED"},
-    {name: "Isabella",rate: "91",vendor: "vendor10",implementation: "Ernst & Young",technology: "HTML/CSS",lead: "Praveen",status: "CONFIRMED"}
-  ];
-  
-  
+  data:any;
+
   openFormModal() {
     this.formModal.show();
   }
@@ -71,26 +62,36 @@ export class EntriesComponent implements OnInit{
     var tech = form?.getElementsByTagName('input').namedItem('technology'+index)?.value;
     var ld = form?.getElementsByTagName('input').namedItem('lead'+index)?.value;
     var st = form?.getElementsByTagName('input').namedItem('status'+index)?.value;
-    this.data[index] = {
-      name:nm?nm:'',
-      rate:rt ? rt:'',
-      vendor:vdr? vdr:'',
-      implementation:impl?impl:'',
-      technology:tech?tech:'',
-      lead:ld?ld:'',
-      status:st?st:''}
+    
+    this.data[index].name =  nm?nm:'';
+    this.data[index].rate = rt ? rt:'';
+    this.data[index].vendor = vdr? vdr:'';
+    this.data[index].implementation = impl?impl:'';
+    this.data[index].technology = tech?tech:'';
+    this.data[index].lead = ld?ld:'';
+    this.data[index].status = st?st:'';
+
+    this.storage.putData(this.data[index]).subscribe(response => {
+      this.storage.getData().subscribe(response => {
+        this.data = response;
+      });
+    });
   }
   
   submit() {
     this.formModal.hide();
-    this.data.push({
+    this.storage.postData({
       name:this.input_name,
       rate:this.input_rate,
       vendor:this.input_vendor,
       technology:this.input_tech,
       implementation:this.input_impl,
       lead:this.input_lead,
-      status:this.input_status})
+      status:this.input_status}).subscribe(response => {
+        this.storage.getData().subscribe(response => {
+          this.data = response;
+        });
+      });
       this.input_name="";
       this.input_rate="";
       this.input_vendor="";
@@ -108,8 +109,12 @@ export class EntriesComponent implements OnInit{
   {
     this.tech = val;
   }
-  delete(i:number)
+  delete(index:number)
   {
-    this.data.splice(i,1);
+    this.storage.deleteData(this.data[index]).subscribe(response => {
+      this.storage.getData().subscribe(response => {
+        this.data = response;
+      });
+    });
   }
 }

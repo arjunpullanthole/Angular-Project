@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { StorageService } from '../storage.service';
 import { LoginService } from '../login.service';
-import { Observable, Subscriber, subscribeOn } from 'rxjs';
 
 @Component({
   selector: 'app-login',

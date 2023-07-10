@@ -8,6 +8,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { FormsModule } from '@angular/forms';
 import { EntriesComponent } from './entries/entries.component';
 import { DisplayModule } from './display/display.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { DisplayModule } from './display/display.module';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    DisplayModule
+    DisplayModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

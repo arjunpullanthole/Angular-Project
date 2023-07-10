@@ -1,14 +1,35 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StorageService {
-  constructor() { }
+  constructor(private http: HttpClient) { }
   public auth = new BehaviorSubject<boolean>(false);
   public role = new BehaviorSubject<string>("User");
   public mode = new BehaviorSubject<string>("User");
+
+  public getData(): Observable<any> {
+    const url = 'http://localhost:8080/Submission';
+    return this.http.get<any>(url); 
+  }
+
+  public postData(data:any): Observable<any> {
+    const url = 'http://localhost:8080/Submission/data';
+    return this.http.post<any>(url,data);
+  }
+
+  public putData(data:any): Observable<any> {
+    const url = 'http://localhost:8080/Submission/data';
+    return this.http.put<any>(url,data);
+  }
+
+  public deleteData(data:any): Observable<any> {
+    const url = 'http://localhost:8080/Submission/'+data.id;
+    return this.http.delete<any>(url);
+  }
 
   public setrole(val:string)
   {
@@ -38,10 +59,7 @@ export class StorageService {
   {
     this.auth.next(!this.auth.getValue());
   }
-  public setAuth(val:boolean)
-  {
-    this.auth.next(val);
-  }
+
   public isAuth()
   {
     return this.auth.value;

@@ -28,7 +28,7 @@
         <!-- Right links -->
         <ul class="navbar-nav ms-auto d-flex flex-row">
           <li>
-            <button *ngIf="mode === 'Admin'; else User" (click)="toggleview()" type="button" class="btn btn-danger">{{mode}}</button>
+            <button *ngIf="isAdminView(); else User" (click)="toggleview()" type="button" class="btn btn-danger">{{mode}}</button>
             <ng-template #User>
               <button (click)="toggleview()" type="button" class="btn btn-success">{{mode}}</button>
             </ng-template>
