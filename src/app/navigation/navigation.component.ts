@@ -22,6 +22,11 @@ export class NavigationComponent implements OnInit{
   {
     return this.storage.getrole() === "Admin" && this.storage.getmode() === "Admin" ;
   }
+
+  isAdmin()
+  {
+    return this.storage.getrole() === "Admin";
+  }
   toggleview()
   {
     if (this.storage.getrole() === "Admin")

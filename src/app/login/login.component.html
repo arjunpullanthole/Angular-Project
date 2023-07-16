@@ -6,40 +6,37 @@
             <div class="row g-0">
               <div class="col-lg-6">
                 <div class="card-body p-md-5 mx-md-4">
-  
                   <div class="text-center">
-                    <img src="../../assets/login.jpeg"
+                    <img src="../../assets/login3.png"
                       style="width: 185px;" alt="logo">
+
                   </div>
-  
-                  <form>
-                    <p>Please login to your account</p>
-  
-                    <div class="form-outline mb-4">
-                      <input type="email" id="username" name="username" class="form-control" [(ngModel)] = "input_firstname"/>
-                      <label class="form-label" for="username">Username</label>
-                    </div>
-  
-                    <div class="form-outline mb-4">
-                      <input type="password" id="password" name="password" class="form-control" [(ngModel)] = "input_password">
-                      <label class="form-label" for="password">Password</label>
-                    </div>
-  
+                  <!-- Login Form -->
+                  <form class="custom-form">
+                    <mat-form-field class="full-width" appearance="outline">
+                      <mat-label>User Name</mat-label>
+                        <input matInput placeholder="Enter your name" name="username"
+                        type="text"[(ngModel)] ="input_username">
+                      </mat-form-field>
+                    <mat-form-field class="full-width" appearance="outline">
+                      <mat-label>Password</mat-label>
+                        <input matInput [type]="hide ? 'password' : 'text'" placeholder="Enter your password" name="password" 
+                        [(ngModel)]= "input_password">
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                    </mat-form-field>
                     <div class="text-center pt-1 mb-5 pb-1">
                       <ul style="list-style-type:none;">
-                        <li><button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" 
-                          type="button" (click)="login()">Login</button></li>
+                        <li><button mat-raised-button color="primary" (click)="login()">Login</button></li>
                         <li><a class="text-muted" href="">Forgot password?</a></li>
                       </ul>
                     </div>
-  
-                    <div class="d-flex align-items-center justify-content-center pb-4">
-                      <p class="mb-0 me-2">Don't have an account?</p>
-                      <button type="button" class="btn btn-outline-danger">Create new</button>
-                    </div>
-  
                   </form>
-  
+                  <div class="d-flex align-items-center justify-content-center pb-4">
+                    <p class="mb-0 me-2">Don't have an account?</p>
+                    <button type="button" class="btn btn-outline-danger">Create new</button>
+                  </div>
                 </div>
               </div>
               <div class="col-lg-6 d-flex align-items-center gradient-custom-2">

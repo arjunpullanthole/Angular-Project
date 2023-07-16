@@ -18,9 +18,9 @@ const routes: Routes = [
     {path: "profile",component: ProfileComponent},
     {path: "entries",component: EntriesComponent},
     {path: "display",
-    loadChildren: () => import('./display/display.module').then(m => m.DisplayModule),
-    data:{roles:["Admin"]},canActivate:[adminGuard]}
-    //data:{roles:["Admin"]}}
+    loadChildren: () => import('./display/display.module').then(m => m.DisplayModule)
+    ,data:{roles:["Admin"]},canActivate:[adminGuard]}
+  // }
   ]
   }
 ];

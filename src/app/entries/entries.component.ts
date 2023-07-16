@@ -1,8 +1,35 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { FormControl, Validators, FormGroup } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { StorageService } from '../storage.service';
-import { DOCUMENT } from '@angular/common';
+import { MatTableDataSource } from '@angular/material/table';
+import { SelectionModel } from '@angular/cdk/collections';
+import { MatDialog } from '@angular/material/dialog';
+import { EditdialogComponent } from '../editdialog/editdialog.component';
 declare var window: any;
+
+export interface IPeriodicElement 
+{
+    id: string;
+    name: string;
+    rate: string;
+    vendor: string;
+    implementation: string;
+    technology: string;
+    lead: string;
+    status: string;
+}
+
+class PeriodicElement implements IPeriodicElement
+{
+    id='';
+    name='';
+    rate='';
+    vendor='';
+    implementation='';
+    technology='';
+    lead='';
+    status='';
+}
+
 @Component({
   selector: 'app-entries',
   templateUrl: './entries.component.html',
@@ -10,40 +37,92 @@ declare var window: any;
 })
 export class EntriesComponent implements OnInit{
 
-  constructor(private storage:StorageService){}
+  constructor(private storage:StorageService,public dialog: MatDialog){}
 
   ngOnInit(): void {
-    this.formModal = new window.bootstrap.Modal(
-      document.getElementById('myModal')
-    );
     this.storage.getData().subscribe(response => {
       this.data = response;
+      this.update(this.data);
   });
   }
 
-  formModal: any;
-  editModal:any;
-  input_name="";
-  input_rate="";
-  input_vendor="";
-  input_impl="";
-  input_tech="";
-  input_lead="";
-  input_status="";
-  lead ="Lead";
-  tech = "Technology";
+  data:any;
+  dataSource:any;
+  selection = new SelectionModel<PeriodicElement>(true, []);
   leads = ["Praveen","Tejan","Sagar","Raj","Jagesh","Manohar","Vinay","Spandana","Kranthi","All"];
   techs = ["Java","Angular","SQL","All"];
-  data:any;
+  displayedColumns = ["select", "position", "name", "rate", "vendor","implementation","technology","lead","status"];
+  
 
-  openFormModal() {
-    this.formModal.show();
+  /** Whether the number of selected elements matches the total number of rows. */
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
   }
-  editFormModal(val:number)
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  toggleAllRows() {
+    if (this.isAllSelected()) {
+      this.selection.clear();
+      return;
+    }
+
+    this.selection.select(...this.dataSource.data);
+  }
+
+  /** The label for the checkbox on the passed row */
+  checkboxLabel(i:number, row?: PeriodicElement): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${i + 1}`;
+  }
+
+  openEditDialog(): void {
+    const dialogRef = this.dialog.open(EditdialogComponent,{data:JSON.parse(JSON.stringify(this.selection.selected.at(0)))});
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.storage.putData(result).subscribe(() => {
+          this.storage.getData().subscribe(response => {
+            this.data = response;
+            this.update(this.data);
+            this.selection.clear();
+          });
+        });
+      }
+    });
+  }
+
+  openAddDialog():void{
+    const dialogRef = this.dialog.open(EditdialogComponent,{data:new PeriodicElement()});
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.storage.postData(result).subscribe(() => {
+          this.storage.getData().subscribe(response => {
+            this.data = response;
+            this.update(this.data);
+          });
+        });
+      }
+    });
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  applySelection(val:any)
   {
-    this.editModal = new window.bootstrap.Modal(
-      document.getElementById('editModal'+val));
-    this.editModal.show();
+    if(!val)
+      return;
+    if(val === "All")
+    {
+      this.dataSource.filter = "";
+      return;
+    }
+    this.dataSource.filter = val.trim().toLowerCase();
   }
 
   isAdminView()
@@ -51,70 +130,21 @@ export class EntriesComponent implements OnInit{
     return this.storage.getrole() === "Admin" && this.storage.getmode() === "Admin" ;
   }
 
-  edit(index:number)
+  update(data:any)
   {
-    this.editModal.hide();
-    var form = document.getElementById('editModal'+index);
-    var nm = form?.getElementsByTagName('input').namedItem('name'+index)?.value;
-    var rt = form?.getElementsByTagName('input').namedItem('rate'+index)?.value;
-    var vdr = form?.getElementsByTagName('input').namedItem('vendor'+index)?.value;
-    var impl = form?.getElementsByTagName('input').namedItem('implementation'+index)?.value;
-    var tech = form?.getElementsByTagName('input').namedItem('technology'+index)?.value;
-    var ld = form?.getElementsByTagName('input').namedItem('lead'+index)?.value;
-    var st = form?.getElementsByTagName('input').namedItem('status'+index)?.value;
-    
-    this.data[index].name =  nm?nm:'';
-    this.data[index].rate = rt ? rt:'';
-    this.data[index].vendor = vdr? vdr:'';
-    this.data[index].implementation = impl?impl:'';
-    this.data[index].technology = tech?tech:'';
-    this.data[index].lead = ld?ld:'';
-    this.data[index].status = st?st:'';
-
-    this.storage.putData(this.data[index]).subscribe(response => {
-      this.storage.getData().subscribe(response => {
-        this.data = response;
-      });
-    });
+    this.dataSource = new MatTableDataSource(data);
   }
-  
-  submit() {
-    this.formModal.hide();
-    this.storage.postData({
-      name:this.input_name,
-      rate:this.input_rate,
-      vendor:this.input_vendor,
-      technology:this.input_tech,
-      implementation:this.input_impl,
-      lead:this.input_lead,
-      status:this.input_status}).subscribe(response => {
+
+  delete()
+  {
+    this.selection.selected.forEach(data => {
+      this.storage.deleteData(data).subscribe(() => {
         this.storage.getData().subscribe(response => {
           this.data = response;
+          this.update(this.data);
         });
       });
-      this.input_name="";
-      this.input_rate="";
-      this.input_vendor="";
-      this.input_impl="";
-      this.input_tech="";
-      this.input_lead="";
-      this.input_status="";
-  }
-  
-  getSelectedLead(val:string)
-  {
-    this.lead = val;
-  }
-  getSelectedTech(val:string)
-  {
-    this.tech = val;
-  }
-  delete(index:number)
-  {
-    this.storage.deleteData(this.data[index]).subscribe(response => {
-      this.storage.getData().subscribe(response => {
-        this.data = response;
-      });
-    });
+    })
+    this.selection.clear();
   }
 }

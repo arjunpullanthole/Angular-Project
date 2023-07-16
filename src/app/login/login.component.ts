@@ -10,10 +10,11 @@ import { LoginService } from '../login.service';
 })
 export class LoginComponent {
   constructor(private router: Router, private storage: StorageService, private loginserv: LoginService) { }
-  input_firstname = '';
+  input_username = '';
   input_password = '';
+  hide = true;
   login() {
-    this.loginserv.onLogin(this.input_firstname, this.input_password).subscribe(v => {
+    this.loginserv.onLogin(this.input_username, this.input_password).subscribe(v => {
       if (v.value) {
         alert("Login successful");
         this.router.navigate(['/main']);
@@ -22,6 +23,5 @@ export class LoginComponent {
         alert("Invalid login");
       }
     })
-
   }
 }

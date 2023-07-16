@@ -1,0 +1,64 @@
+<h2 mat-dialog-title>Enter the Student Details</h2>
+<form>
+<mat-dialog-content class="mat-typography">
+  <p>
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Name</mat-label>
+        <input matInput placeholder="Enter the student name" name="name"
+        type="text" [(ngModel)]="data.name">
+    </mat-form-field>
+  </p>
+  
+  <p>
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Rate</mat-label>
+        <input matInput placeholder="Enter student rate" name="rate"
+        type="text" [(ngModel)]="data.rate">
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Vendor</mat-label>
+        <input matInput placeholder="Enter vendor name" name="vendor"
+        type="text" [(ngModel)]="data.vendor">
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Implementation</mat-label>
+        <input matInput placeholder="Enter the implementation partner" name="implementation"
+        type="text" [(ngModel)]="data.implementation">
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Technology</mat-label>
+        <input matInput placeholder="Enter the technology" name="technology"
+        type="text" [(ngModel)]="data.technology">
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Lead</mat-label>
+        <input matInput placeholder="Enter the lead name" name="lead"
+        type="text" [(ngModel)]="data.lead">
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Status</mat-label>
+        <input matInput placeholder="Enter the status" name="status"
+        type="text" [(ngModel)]="data.status">
+    </mat-form-field>
+  </p>
+  
+</mat-dialog-content>
+</form>
+<div mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>No Thanks</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Save</button>
+</div>
