@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { StorageService } from '../storage.service';
+import {MediaMatcher} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-navigation',
@@ -9,7 +10,9 @@ import { StorageService } from '../storage.service';
 })
 export class NavigationComponent implements OnInit{
   constructor(private storage:StorageService,private router:Router){}
+
   mode :any;
+  submissionBadge = false;
   ngOnInit(): void {
     this.storage.mode.subscribe(x => this.mode = x);
   }
@@ -35,5 +38,4 @@ export class NavigationComponent implements OnInit{
       this.router.navigate(['/main/entries']);
     }
   }
-
 }

@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { StorageService } from '../storage.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatDialog } from '@angular/material/dialog';
 import { EditdialogComponent } from '../editdialog/editdialog.component';
-declare var window: any;
+import { MatPaginator } from '@angular/material/paginator';
 
 export interface IPeriodicElement 
 {
@@ -37,27 +37,39 @@ class PeriodicElement implements IPeriodicElement
 })
 export class EntriesComponent implements OnInit{
 
-  constructor(private storage:StorageService,public dialog: MatDialog){}
-
-  ngOnInit(): void {
-    this.storage.getData().subscribe(response => {
-      this.data = response;
-      this.update(this.data);
-  });
-  }
+  constructor(private storage:StorageService, public dialog: MatDialog){}
 
   data:any;
   dataSource:any;
-  selection = new SelectionModel<PeriodicElement>(true, []);
+  selection = new SelectionModel<IPeriodicElement>(true, []);
   leads = ["Praveen","Tejan","Sagar","Raj","Jagesh","Manohar","Vinay","Spandana","Kranthi","All"];
   techs = ["Java","Angular","SQL","All"];
   displayedColumns = ["select", "position", "name", "rate", "vendor","implementation","technology","lead","status"];
   
+  @ViewChild('scheduledOrdersPaginator') paginator: MatPaginator;
+
+  ngOnInit(): void {
+    this.loadData();
+  }
+
+  loadData()
+  {
+    this.storage.getData().subscribe(response => {
+      this.data = response;
+      this.update(this.data);
+    });
+  }
+
+  update(data:any)
+  {
+    this.dataSource = new MatTableDataSource(data);
+    this.dataSource.paginator = this.paginator;
+  }
 
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
+    const numSelected = this.selection?.selected.length;
+    const numRows = this.dataSource?.data.length;
     return numSelected === numRows;
   }
 
@@ -72,7 +84,7 @@ export class EntriesComponent implements OnInit{
   }
 
   /** The label for the checkbox on the passed row */
-  checkboxLabel(i:number, row?: PeriodicElement): string {
+  checkboxLabel(i:number, row?: IPeriodicElement): string {
     if (!row) {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
     }
@@ -130,19 +142,11 @@ export class EntriesComponent implements OnInit{
     return this.storage.getrole() === "Admin" && this.storage.getmode() === "Admin" ;
   }
 
-  update(data:any)
-  {
-    this.dataSource = new MatTableDataSource(data);
-  }
-
   delete()
   {
     this.selection.selected.forEach(data => {
       this.storage.deleteData(data).subscribe(() => {
-        this.storage.getData().subscribe(response => {
-          this.data = response;
-          this.update(this.data);
-        });
+        this.loadData();
       });
     })
     this.selection.clear();

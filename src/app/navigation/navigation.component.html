@@ -1,51 +1,54 @@
-<header>
-  <!-- Sidebar -->
-  <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
-    <div class="position-sticky">
-      <div class="list-group list-group-flush mx-3 mt-4">
-        <a [routerLink]="'entries'" class="list-group-item list-group-item-action py-2 ripple">
-          <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Submissions</span></a>
-        <a [routerLink]="'display/leads'" *ngIf="isAdminView()" class="list-group-item list-group-item-action py-2 ripple">
-          <i class="fas fa-lock fa-fw me-3"></i><span>Leads</span></a>
-        <a [routerLink]="'display/vendors'" *ngIf="isAdminView()" class="list-group-item list-group-item-action py-2 ripple">
-          <i class="fas fa-chart-line fa-fw me-3"></i><span>Vendors</span></a>
-        <a [routerLink]="'display/students'" *ngIf="isAdminView()" class="list-group-item list-group-item-action py-2 ripple">
-          <i class="fas fa-chart-line fa-fw me-3"></i><span>Students</span></a>
-        <a [routerLink]="'display/tabs'" *ngIf="isAdminView()" class="list-group-item list-group-item-action py-2 ripple">
-          <i class="fas fa-chart-line fa-fw me-3"></i><span>Display</span></a>    
-      </div>
-    </div>
-  </nav>
-
-  <!-- Main Navbar -->
-  <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top gradient-custom">
-    <!-- Container wrapper -->
-    <div class="container-fluid">
-      <!-- Brand -->
-      <a class="navbar-brand">
-          <img src="../../assets/DP.jpg" [routerLink]="'.'" class="rounded-circle" height="50" alt="Avatar" loading="lazy" />
-      </a>
-      <!-- Right links -->
-      <ul class="navbar-nav ms-auto d-flex flex-row">
-        <li>
-          <button *ngIf="isAdmin()" mat-raised-button [color]="isAdminView()? 'warn': 'primary'">
-            {{mode}} view <mat-slide-toggle color="warn" (click)="toggleview()" 
-            [checked]="isAdminView()"></mat-slide-toggle></button>
-        </li>
-        <li>
-          <a mat-raised-button color="primary" [routerLink]="'profile'">Profile</a>
-        </li>
-        <li>
-          <a mat-raised-button color="primary" (click)="logout()">Logout</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-</header>
+<div class="example-container">
   
-  <!--Main layout-->
-<main style="margin-top: 58px;">
-  <div class="container pt-4">
-    <router-outlet></router-outlet>
-  </div>
-</main>
+  <!-- Header -->
+  <mat-toolbar color="primary" class="example-toolbar">
+    <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top gradient-custom">
+      <!-- Container wrapper -->
+      <div class="container-fluid">
+        <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+        <a class="navbar-brand">
+            <img src="../../assets/DP.jpg" [routerLink]="'.'" class="rounded-circle" height="50" alt="Avatar" loading="lazy" />
+        </a>
+        <!-- Right links -->
+        <ul class="navbar-nav ms-auto d-flex flex-row">
+          <li>
+            <button *ngIf="isAdmin()" mat-raised-button [color]="isAdminView()? 'warn': 'primary'">
+              {{mode}} view <mat-slide-toggle color="warn" (click)="toggleview()" 
+              [checked]="isAdminView()"></mat-slide-toggle></button>
+          </li>
+          <li>
+            <a mat-raised-button color="primary" [routerLink]="'profile'">Profile</a>
+          </li>
+          <li>
+            <a mat-raised-button color="primary" (click)="logout()">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </mat-toolbar>
+
+  <!-- Side Navigation -->
+  <mat-sidenav-container class="example-sidenav-container">
+    <mat-sidenav #snav mode="over">
+      <mat-nav-list>
+        <a mat-list-item [routerLink]="'entries'">
+          <mat-icon>account_circle</mat-icon>Submissions</a>
+        <a mat-list-item [routerLink]="'display/leads'" *ngIf="isAdminView()">
+          <mat-icon>account_circle</mat-icon>Leads</a>
+        <a mat-list-item [routerLink]="'display/vendors'" *ngIf="isAdminView()">
+          <mat-icon>account_circle</mat-icon>Vendors</a>
+        <a mat-list-item [routerLink]="'display/students'" *ngIf="isAdminView()">
+          <mat-icon>account_circle</mat-icon>Students</a>
+        <a mat-list-item [routerLink]="'display/tabs'" *ngIf="isAdminView()">
+          <mat-icon>account_circle</mat-icon>Display</a> 
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <!-- Main Content -->
+    <mat-sidenav-content>
+        <div class="container pt-4">
+          <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
