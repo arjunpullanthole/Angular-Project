@@ -7,9 +7,10 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 })
 export class StorageService {
   constructor(private http: HttpClient) { }
-  public auth = new BehaviorSubject<boolean>(false);
-  public role = new BehaviorSubject<string>("User");
-  public mode = new BehaviorSubject<string>("User");
+  private auth = new BehaviorSubject<boolean>(false);
+  private role = new BehaviorSubject<string>("User");
+  private mode = new BehaviorSubject<string>("User");
+  public darktheme = new BehaviorSubject<boolean>(false);
 
   public getData(): Observable<any> {
     const url = 'http://localhost:8080/Submission';
@@ -31,10 +32,21 @@ export class StorageService {
     return this.http.delete<any>(url);
   }
 
+  public toggletheme()
+  {
+    this.darktheme.next(!this.darktheme.getValue());
+  }
+
+  public gettheme()
+  {
+    return this.darktheme.value;
+  }
+
   public setrole(val:string)
   {
     this.role.next(val);
   }
+
   public getrole()
   {
     return this.role.value;
@@ -51,7 +63,7 @@ export class StorageService {
 
   public togglemode()
   {
-    var val: string = this.getmode()==="User" ? "Admin" : "User";
+    var val: string = this.mode.value==="User" ? "Admin" : "User";
     this.setmode(val);
   }
 

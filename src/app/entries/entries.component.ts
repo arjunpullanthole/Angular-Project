@@ -33,7 +33,7 @@ class PeriodicElement implements IPeriodicElement
 @Component({
   selector: 'app-entries',
   templateUrl: './entries.component.html',
-  styleUrls: ['./entries.component.css']
+  styleUrls: ['./entries.component.scss']
 })
 export class EntriesComponent implements OnInit{
 

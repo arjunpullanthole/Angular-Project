@@ -12,8 +12,14 @@
         <!-- Right links -->
         <ul class="navbar-nav ms-auto d-flex flex-row">
           <li>
+            <mat-icon>brightness_high</mat-icon>
+            <mat-slide-toggle color="primary" (click)="toggletheme()" 
+            [checked]="isdarktheme()"></mat-slide-toggle>
+            <mat-icon>bedtime</mat-icon>
+          </li>
+          <li>
             <button *ngIf="isAdmin()" mat-raised-button [color]="isAdminView()? 'warn': 'primary'">
-              {{mode}} view <mat-slide-toggle color="warn" (click)="toggleview()" 
+              {{getmode()}} view <mat-slide-toggle color="warn" (click)="toggleview()" 
               [checked]="isAdminView()"></mat-slide-toggle></button>
           </li>
           <li>

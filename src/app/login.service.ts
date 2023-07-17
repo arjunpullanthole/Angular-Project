@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { StorageService } from './storage.service';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 
 
 const users = [
@@ -26,7 +26,7 @@ export class LoginService {
       this.storage.setrole(user.role);
       this.storage.setmode(user.role);
     }
-    return of(this.storage.auth);
+    return of(this.storage.isAuth());
   }
 
 }

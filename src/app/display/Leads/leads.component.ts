@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-leads',
   templateUrl: './leads.component.html',
-  styleUrls: ['./leads.component.css']
+  styleUrls: ['./leads.component.scss']
 })
 export class LeadsComponent {
 

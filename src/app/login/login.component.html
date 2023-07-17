@@ -13,12 +13,12 @@
                   </div>
                   <!-- Login Form -->
                   <form class="custom-form">
-                    <mat-form-field class="full-width" appearance="outline">
+                    <mat-form-field class="full-width" appearance="fill">
                       <mat-label>User Name</mat-label>
                         <input matInput placeholder="Enter your name" name="username"
                         type="text"[(ngModel)] ="input_username">
                       </mat-form-field>
-                    <mat-form-field class="full-width" appearance="outline">
+                    <mat-form-field class="full-width" appearance="fill">
                       <mat-label>Password</mat-label>
                         <input matInput [type]="hide ? 'password' : 'text'" placeholder="Enter your password" name="password" 
                         [(ngModel)]= "input_password">
@@ -39,7 +39,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+              <div class="col-lg-6 d-flex align-items-center">
                   <img src ="../../assets/login_pic.jpeg" 
                   style="width:100%;height:100%;object-fit:cover;">
               </div>

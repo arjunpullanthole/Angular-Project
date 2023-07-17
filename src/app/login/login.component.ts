@@ -6,7 +6,7 @@ import { LoginService } from '../login.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
   constructor(private router: Router, private storage: StorageService, private loginserv: LoginService) { }
@@ -15,7 +15,7 @@ export class LoginComponent {
   hide = true;
   login() {
     this.loginserv.onLogin(this.input_username, this.input_password).subscribe(v => {
-      if (v.value) {
+      if (v) {
         alert("Login successful");
         this.router.navigate(['/main']);
       }

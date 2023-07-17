@@ -5,7 +5,7 @@ import { IPeriodicElement } from '../entries/entries.component';
 @Component({
   selector: 'app-editdialog',
   templateUrl: './editdialog.component.html',
-  styleUrls: ['./editdialog.component.css']
+  styleUrls: ['./editdialog.component.scss']
 })
 export class EditdialogComponent{
 
