@@ -13,12 +13,12 @@
                   </div>
                   <!-- Login Form -->
                   <form class="custom-form">
-                    <mat-form-field class="full-width" appearance="fill">
+                    <mat-form-field class="full-width" appearance="outline">
                       <mat-label>User Name</mat-label>
                         <input matInput placeholder="Enter your name" name="username"
                         type="text"[(ngModel)] ="input_username">
                       </mat-form-field>
-                    <mat-form-field class="full-width" appearance="fill">
+                    <mat-form-field class="full-width" appearance="outline">
                       <mat-label>Password</mat-label>
                         <input matInput [type]="hide ? 'password' : 'text'" placeholder="Enter your password" name="password" 
                         [(ngModel)]= "input_password">

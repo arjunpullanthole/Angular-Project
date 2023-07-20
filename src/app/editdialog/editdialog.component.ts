@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { IPeriodicElement } from '../entries/entries.component';
+import { ISubmission } from '../entries/entries.component';
 
 @Component({
   selector: 'app-editdialog',
@@ -11,6 +11,6 @@ export class EditdialogComponent{
 
   constructor(
     public dialogRef: MatDialogRef<EditdialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: IPeriodicElement
+    @Inject(MAT_DIALOG_DATA) public data: ISubmission
   ) {}
 }

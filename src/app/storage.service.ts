@@ -11,24 +11,25 @@ export class StorageService {
   private role = new BehaviorSubject<string>("User");
   private mode = new BehaviorSubject<string>("User");
   public darktheme = new BehaviorSubject<boolean>(false);
+  submissionUrl = "http://localhost:8080/submission";
 
-  public getData(): Observable<any> {
-    const url = 'http://localhost:8080/Submission';
+  public getSubmission(): Observable<any> {
+    const url = this.submissionUrl;
     return this.http.get<any>(url); 
   }
 
-  public postData(data:any): Observable<any> {
-    const url = 'http://localhost:8080/Submission/data';
+  public postSubmission(data:any): Observable<any> {
+    const url = this.submissionUrl+'/data';
     return this.http.post<any>(url,data);
   }
 
-  public putData(data:any): Observable<any> {
-    const url = 'http://localhost:8080/Submission/data';
+  public putSubmission(data:any): Observable<any> {
+    const url = this.submissionUrl+'/data';
     return this.http.put<any>(url,data);
   }
 
-  public deleteData(data:any): Observable<any> {
-    const url = 'http://localhost:8080/Submission/'+data.id;
+  public deleteSubmission(data:any): Observable<any> {
+    const url = this.submissionUrl+'/'+data.id;
     return this.http.delete<any>(url);
   }
 

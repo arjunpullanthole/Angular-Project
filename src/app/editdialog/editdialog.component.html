@@ -3,56 +3,113 @@
 <mat-dialog-content class="mat-typography">
   <p>
     <mat-form-field class="full-width" appearance="outline">
-      <mat-label>Name</mat-label>
-        <input matInput placeholder="Enter the student name" name="name"
-        type="text" [(ngModel)]="data.name">
+      <mat-label>Consultant Id</mat-label>
+        <input matInput placeholder="Enter the consultant Id" name="id"
+        type="text" [(ngModel)]="data.consultantId">
     </mat-form-field>
   </p>
   
   <p>
     <mat-form-field class="full-width" appearance="outline">
-      <mat-label>Rate</mat-label>
-        <input matInput placeholder="Enter student rate" name="rate"
-        type="text" [(ngModel)]="data.rate">
+      <mat-label>Submission Date</mat-label>
+        <input matInput placeholder="Enter the submission date" name="date"
+        type="text" [(ngModel)]="data.submission">
     </mat-form-field>
   </p>
 
   <p>
     <mat-form-field class="full-width" appearance="outline">
-      <mat-label>Vendor</mat-label>
-        <input matInput placeholder="Enter vendor name" name="vendor"
-        type="text" [(ngModel)]="data.vendor">
+      <mat-label>Vendor Company</mat-label>
+        <input matInput placeholder="Enter the vendor company" name="company"
+        type="text" [(ngModel)]="data.vendorCompany">
     </mat-form-field>
   </p>
 
   <p>
     <mat-form-field class="full-width" appearance="outline">
-      <mat-label>Implementation</mat-label>
+      <mat-label>Vendor Name</mat-label>
+        <input matInput placeholder="Enter the vendor name" name="name"
+        type="text" [(ngModel)]="data.vendorName">
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Vendor Email</mat-label>
+        <input matInput placeholder="Enter vendor name" name="email"
+        type="text" [(ngModel)]="data.vendorEmailAddress">
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Vendor Phone</mat-label>
+        <input matInput placeholder="Enter vendor name" name="phone"
+        type="text" [(ngModel)]="data.vendorPhoneNumber">
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Implementation Partner</mat-label>
         <input matInput placeholder="Enter the implementation partner" name="implementation"
-        type="text" [(ngModel)]="data.implementation">
+        type="text" [(ngModel)]="data.implementationPartner">
     </mat-form-field>
   </p>
 
   <p>
     <mat-form-field class="full-width" appearance="outline">
-      <mat-label>Technology</mat-label>
-        <input matInput placeholder="Enter the technology" name="technology"
-        type="text" [(ngModel)]="data.technology">
+      <mat-label>Client Name</mat-label>
+        <input matInput placeholder="Enter the client name" name="client"
+        type="text" [(ngModel)]="data.clientName">
     </mat-form-field>
   </p>
 
   <p>
     <mat-form-field class="full-width" appearance="outline">
-      <mat-label>Lead</mat-label>
-        <input matInput placeholder="Enter the lead name" name="lead"
-        type="text" [(ngModel)]="data.lead">
+      <mat-label>Rate</mat-label>
+        <input matInput placeholder="Enter the pay rate" name="rate"
+        type="text" [(ngModel)]="data.payRate">
     </mat-form-field>
   </p>
+
   <p>
     <mat-form-field class="full-width" appearance="outline">
-      <mat-label>Status</mat-label>
+      <mat-label>Submission Status</mat-label>
         <input matInput placeholder="Enter the status" name="status"
-        type="text" [(ngModel)]="data.status">
+        type="text" [(ngModel)]="data.submissionStatus">
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Submission Type</mat-label>
+        <input matInput placeholder="Enter the type" name="type"
+        type="text" [(ngModel)]="data.submissionType">
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>City</mat-label>
+        <input matInput placeholder="Enter the city" name="city"
+        type="text" [(ngModel)]="data.city">
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>State</mat-label>
+        <input matInput placeholder="Enter the state name" name="state"
+        type="text" [(ngModel)]="data.state">
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Zip Code</mat-label>
+        <input matInput placeholder="Enter the Zip" name="zip"
+        type="text" [(ngModel)]="data.zip">
     </mat-form-field>
   </p>
   

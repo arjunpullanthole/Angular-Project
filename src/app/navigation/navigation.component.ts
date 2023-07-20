@@ -1,7 +1,8 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, HostBinding, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { StorageService } from '../storage.service';
-import {MediaMatcher} from '@angular/cdk/layout';
+import { OverlayContainer } from '@angular/cdk/overlay';
+
 
 @Component({
   selector: 'app-navigation',
@@ -9,10 +10,23 @@ import {MediaMatcher} from '@angular/cdk/layout';
   styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent implements OnInit{
-  constructor(private storage:StorageService,private router:Router){}
+
+  constructor(private storage:StorageService,private router:Router,private overlayContainer: OverlayContainer){}
 
   submissionBadge = false;
-  ngOnInit(): void {}
+  @HostBinding('class') className = '';
+  
+  ngOnInit(): void {
+    this.storage.darktheme.subscribe(val => {
+      const dark = 'darkMode';
+      this.className = val ? dark : '';
+      const classes = this.overlayContainer.getContainerElement().classList;
+      if(val)
+        classes.add(dark);
+      else
+        classes.remove(dark);
+    });
+  }
 
   logout()
   {

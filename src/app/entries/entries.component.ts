@@ -1,33 +1,48 @@
-import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { StorageService } from '../storage.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatDialog } from '@angular/material/dialog';
 import { EditdialogComponent } from '../editdialog/editdialog.component';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatChip, MatChipOption } from '@angular/material/chips';
 
-export interface IPeriodicElement 
+export interface ISubmission
 {
-    id: string;
-    name: string;
-    rate: string;
-    vendor: string;
-    implementation: string;
-    technology: string;
-    lead: string;
-    status: string;
+  id: string;
+  consultantId: string;
+  submission: string;     //date
+  vendorCompany: string;
+  vendorName: string;
+  vendorEmailAddress: string;
+  vendorPhoneNumber: string;
+  implementationPartner: string;
+  clientName: string;
+  payRate: string;
+  submissionStatus: string;
+  submissionType: string;
+  city: string;
+  state: string;
+  zip: string;
 }
 
-class PeriodicElement implements IPeriodicElement
+class Submission implements ISubmission
 {
-    id='';
-    name='';
-    rate='';
-    vendor='';
-    implementation='';
-    technology='';
-    lead='';
-    status='';
+  id="";
+  consultantId ="";
+  submission ="";     //date
+  vendorCompany ="";
+  vendorName ="";
+  vendorEmailAddress ="";
+  vendorPhoneNumber ="";
+  implementationPartner ="";
+  clientName ="";
+  payRate ="";
+  submissionStatus ="";
+  submissionType ="";
+  city ="";
+  state ="";
+  zip ="";
 }
 
 @Component({
@@ -41,11 +56,12 @@ export class EntriesComponent implements OnInit{
 
   data:any;
   dataSource:any;
-  selection = new SelectionModel<IPeriodicElement>(true, []);
+  selection = new SelectionModel<ISubmission>(true, []);
   leads = ["Praveen","Tejan","Sagar","Raj","Jagesh","Manohar","Vinay","Spandana","Kranthi","All"];
   techs = ["Java","Angular","SQL","All"];
-  displayedColumns = ["select", "position", "name", "rate", "vendor","implementation","technology","lead","status"];
-  
+  AllColumns = ["submission", "vendorCompany", "vendorName", "vendorEmail","vendorPhone","implementation","client","rate","status","state"];
+  displayedColumns = ["select", "position", "submission", "vendorCompany", "vendorName", "vendorEmail","vendorPhone","implementation","client","rate","status","state"];
+
   @ViewChild('scheduledOrdersPaginator') paginator: MatPaginator;
 
   ngOnInit(): void {
@@ -54,7 +70,7 @@ export class EntriesComponent implements OnInit{
 
   loadData()
   {
-    this.storage.getData().subscribe(response => {
+    this.storage.getSubmission().subscribe(response => {
       this.data = response;
       this.update(this.data);
     });
@@ -84,7 +100,7 @@ export class EntriesComponent implements OnInit{
   }
 
   /** The label for the checkbox on the passed row */
-  checkboxLabel(i:number, row?: IPeriodicElement): string {
+  checkboxLabel(i:number, row?: ISubmission): string {
     if (!row) {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
     }
@@ -95,8 +111,8 @@ export class EntriesComponent implements OnInit{
     const dialogRef = this.dialog.open(EditdialogComponent,{data:JSON.parse(JSON.stringify(this.selection.selected.at(0)))});
     dialogRef.afterClosed().subscribe(result => {
       if(result){
-        this.storage.putData(result).subscribe(() => {
-          this.storage.getData().subscribe(response => {
+        this.storage.putSubmission(result).subscribe(() => {
+          this.storage.getSubmission().subscribe(response => {
             this.data = response;
             this.update(this.data);
             this.selection.clear();
@@ -107,11 +123,11 @@ export class EntriesComponent implements OnInit{
   }
 
   openAddDialog():void{
-    const dialogRef = this.dialog.open(EditdialogComponent,{data:new PeriodicElement()});
+    const dialogRef = this.dialog.open(EditdialogComponent,{data:new Submission()});
     dialogRef.afterClosed().subscribe(result => {
       if(result){
-        this.storage.postData(result).subscribe(() => {
-          this.storage.getData().subscribe(response => {
+        this.storage.postSubmission(result).subscribe(() => {
+          this.storage.getSubmission().subscribe(response => {
             this.data = response;
             this.update(this.data);
           });
@@ -145,10 +161,17 @@ export class EntriesComponent implements OnInit{
   delete()
   {
     this.selection.selected.forEach(data => {
-      this.storage.deleteData(data).subscribe(() => {
+      this.storage.deleteSubmission(data).subscribe(() => {
         this.loadData();
       });
     })
     this.selection.clear();
+  }
+  updateTable(chip:MatChipOption)
+  {
+    if (chip.selected)
+      this.displayedColumns.push(chip.value)
+    else
+      this.displayedColumns.splice(this.displayedColumns.findIndex((val) =>val===chip.value),1)
   }
 }
